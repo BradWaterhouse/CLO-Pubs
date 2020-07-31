@@ -4,7 +4,7 @@
     <title>CLO Pubs</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-{#    {{ encore_entry_link_tags('app-css') }}#}
+    {{ encore_entry_link_tags('app-css') }}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -16,6 +16,8 @@
     {% include 'navigation.html.twig' %}
 {% endblock %}
 {% block content %}{% endblock %}
-
+{% block footer %}
+    {% include 'footer.html.twig' %}
+{% endblock %}
 </body>
 </html>
