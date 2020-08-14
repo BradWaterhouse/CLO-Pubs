@@ -17,4 +17,12 @@ class Jobs extends AbstractController
     {
        return $this->render('pages/jobs.html.twig');
     }
+
+    /**
+     * @Route("/job/{id}/apply", name="apply", methods={"GET"})
+     */
+    public function apply(): Response
+    {
+        return $this->render('pages/apply.html.twig');
+    }
 }

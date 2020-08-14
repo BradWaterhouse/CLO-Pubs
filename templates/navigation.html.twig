@@ -1,3 +1,5 @@
+{% set route_name = app.request.attributes.get('_route') %}
+
 <nav class="navbar navbar-expand-lg navbar-dark static-top nav">
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -9,21 +11,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('home') }}">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+                <li {% if route_name == "home" %} class="nav-item active" {% else %} class="nav-item" {% endif %} >
+                    <a class="nav-link" href="{{ path('home') }}">Home</a>
                 </li>
-                <li class="nav-item">
+                <li {% if route_name == "team" %} class="nav-item active" {% else %} class="nav-item" {% endif %} >
                     <a class="nav-link" href="{{ path('team') }}">Our Team</a>
                 </li>
-                <li class="nav-item">
+                <li {% if route_name == "pubs" %} class="nav-item active" {% else %} class="nav-item" {% endif %} >
                     <a class="nav-link" href="{{ path('pubs') }}">Our Pubs</a>
                 </li>
-                <li class="nav-item">
+                <li {% if route_name == "jobs" %} class="nav-item active" {% else %} class="nav-item" {% endif %} >
                     <a class="nav-link" href="{{ path('jobs') }}">Jobs</a>
                 </li>
-                <li class="nav-item">
+                <li {% if route_name == "contact" %} class="nav-item active" {% else %} class="nav-item" {% endif %} >
                     <a class="nav-link" href="{{ path('contact') }}">Contact</a>
                 </li>
             </ul>
