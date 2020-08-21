@@ -15,6 +15,6 @@ class Pubs extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('pages/pubs.html.twig');
+        return $this->render('Pages/pubs.html.twig');
     }
 }

@@ -15,7 +15,7 @@ class Jobs extends AbstractController
      */
     public function index(): Response
     {
-       return $this->render('pages/jobs.html.twig');
+       return $this->render('Pages/jobs.html.twig');
     }
 
     /**
@@ -23,6 +23,6 @@ class Jobs extends AbstractController
      */
     public function apply(): Response
     {
-        return $this->render('pages/apply.html.twig');
+        return $this->render('Pages/apply.html.twig');
     }
 }

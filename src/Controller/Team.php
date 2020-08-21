@@ -15,6 +15,6 @@ class Team extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('pages/team.html.twig');
+        return $this->render('Pages/team.html.twig');
     }
 }
