@@ -17,4 +17,12 @@ class Team extends AbstractController
     {
         return $this->render('Pages/team.html.twig');
     }
+
+    /**
+     * @Route("/dashboard/team", name="dashboard_team", methods={"GET"})
+     */
+    public function show(): Response
+    {
+        return $this->render('Admin/admin_members.html.twig');
+    }
 }

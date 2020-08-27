@@ -11,14 +11,15 @@
 .login-form h2 {
     margin: 0 0 15px;
 }
-.form-control, .btn {
-    min-height: 38px;
-    border-radius: 2px;
-}
+
 .input-group-addon .fa {
     font-size: 18px;
 }
 
 .nav {
-    background-color: #525252;
+    background-color: #c9c9c9;
+}
+
+.nav-title {
+    color: black;
 }
