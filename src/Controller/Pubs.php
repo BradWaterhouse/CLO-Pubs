@@ -17,4 +17,12 @@ class Pubs extends AbstractController
     {
         return $this->render('Pages/pubs.html.twig');
     }
+
+    /**
+     * @Route("/dashboard/pubs", name="dashboard_pubs", methods={"GET"})
+     */
+    public function show(): Response
+    {
+        return $this->render('Admin/admin_pubs.html.twig');
+    }
 }
