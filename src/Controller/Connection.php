@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Doctrine\DBAL\Driver\Connection as DoctrineConnection;
+use Doctrine\DBAL\FetchMode;
 use PDO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class Connection
     {
         $statement = $this->connection->query('SHOW TABLES');
 
-        $results = $statement->fetch(PDO::FETCH_ASSOC);
+        $results = $statement->fetchAll(FetchMode::ASSOCIATIVE);
 
         return new JsonResponse($results);
     }

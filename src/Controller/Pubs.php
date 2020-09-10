@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Repository\Pub;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,9 +14,9 @@ class Pubs extends AbstractController
     /**
      * @Route("/our-pubs", name="pubs", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Pub $repository): Response
     {
-        return $this->render('Pages/pubs.html.twig');
+        return $this->render('Pages/pubs.html.twig', ['pubs' => $repository->getAll()]);
     }
 
     /**
