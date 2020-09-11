@@ -9,97 +9,33 @@
                 and scrambled it to make a type specimen book. It has survived not only five centuries</p>
         </div>
         <div class="col-lg-10 mx-auto">
-
-            <!-- List group-->
             <ul class="list-group">
-
-                <!-- list group item-->
+                {% for job in jobs %}
                 <li class="list-group-item mb-5 shadow">
-                    <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
-                            <h4 class="mt-0 font-weight-bold mb-2 pt-3">General Manager</h4>
-                            <h5 class="mt-0 font-weight-bold mb-2 pt-3">The Rifle - Sutton In Ashfield</h5>
-                            <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Suscipit fuga autem maiores necessitatibus. adipisicing elit.
-                                Suscipit fuga autem maiores necessitatibus</p>
-                            <h6 class="mt-0 font-weight-bold pt-3">£30,000 - £35,000</h6>
+                            <h4 class="mt-0 font-weight-bold mb-2 pt-3">{{ job.job.role }}</h4>
+                            <h5 class="mt-0 font-weight-bold mb-2 pt-3">{{ job.job.title }} - {{ job.job.town }}</h5>
+                            <p class="font-italic text-muted mb-0 small">{{ job.job.description }}</p>
+                            <h6 class="mt-0 font-weight-bold pt-3">{{ job.job.salary }}</h6>
                             <h5 class="pt-3">Expectations</h5>
                             <ul>
-                                <li>Care about finding, growing and engaging your team.</li>
-                                <li>Be accountable for running all aspects of your pub.</li>
-                                <li>Celebrate and create a buzz by sharing enjoyable experiences.</li>
+                                {%  for expectation in job.expectations %}
+                                 <li>{{ expectation }}</li>
+                                {% endfor %}
                             </ul>
                             <h5 class="pt-3">Experience</h5>
                             <ul>
-                                <li>2+ years in any management sector</li>
-                                <li>Basic computer skills</li>
-                                <li>Stock management skills</li>
+                                {%  for requirement in job.requirements %}
+                                    <li>{{ requirement }}</li>
+                                {% endfor %}
                             </ul>
-                            <a href="/job/1/apply" class="btn btn-primary mt-4">Apply now</a>
+                            <a href="/job/{{ job.job.id }}/apply" class="btn btn-primary mt-4">Apply now</a>
                         </div>
                     </div>
-                    <!-- End -->
                 </li>
-                <li class="list-group-item mb-5 shadow">
-                    <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h4 class="mt-0 font-weight-bold mb-2 pt-3">General Manager</h4>
-                            <h5 class="mt-0 font-weight-bold mb-2 pt-3">The Tavern - Sutton In Ashfield</h5>
-                            <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Suscipit fuga autem maiores necessitatibus. adipisicing elit.
-                                Suscipit fuga autem maiores necessitatibus</p>
-                            <h6 class="mt-0 font-weight-bold pt-3">£34,000 - £35,000</h6>
-                            <h5 class="pt-3">Expectations</h5>
-                            <ul>
-                                <li>Care about finding, growing and engaging your team.</li>
-                                <li>Be accountable for running all aspects of your pub.</li>
-                                <li>Celebrate and create a buzz by sharing enjoyable experiences.</li>
-                            </ul>
-                            <h5 class="pt-3">Experience</h5>
-                            <ul>
-                                <li>2+ years in any management sector</li>
-                                <li>Basic computer skills</li>
-                                <li>Stock management skills</li>
-                            </ul>
-                            <a href="/job/1/apply" class="btn btn-primary mt-4">Apply now</a>
-                        </div>
-                    </div>
-                    <!-- End -->
-                </li>
-                <li class="list-group-item mb-5 shadow">
-                    <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h4 class="mt-0 font-weight-bold mb-2 pt-3">General Manager</h4>
-                            <h5 class="mt-0 font-weight-bold mb-2 pt-3">The Swan - Mansfield</h5>
-                            <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Suscipit fuga autem maiores necessitatibus. adipisicing elit.
-                                Suscipit fuga autem maiores necessitatibus</p>
-                            <h6 class="mt-0 font-weight-bold pt-3">£32,000 - £37,000</h6>
-                            <h5 class="pt-3">Expectations</h5>
-                            <ul>
-                                <li>Care about finding, growing and engaging your team.</li>
-                                <li>Be accountable for running all aspects of your pub.</li>
-                                <li>Celebrate and create a buzz by sharing enjoyable experiences.</li>
-                            </ul>
-                            <h5 class="pt-3">Experience</h5>
-                            <ul>
-                                <li>2+ years in any management sector</li>
-                                <li>Basic computer skills</li>
-                                <li>Stock management skills</li>
-                            </ul>
-                            <a href="/job/1/apply" class="btn btn-primary mt-4">Apply now</a>
-                        </div>
-                    </div>
-                    <!-- End -->
-                </li>
-                <!-- End -->
-
-                <!-- list group item-->
+                {% endfor %}
             </ul>
-            <!-- End -->
         </div>
     </div>
 
