@@ -72,7 +72,7 @@
                                                 <tbody>
                                                 {% for teamMember in team %}
                                                 <tr>
-                                                    <td><a href="/dashboard/team/{{ teamMember.id }}">{{ teamMember.name }}</a></td>
+                                                    <td><a class="link-text" href="/dashboard/team/edit/{{ teamMember.id }}">{{ teamMember.name }}</a></td>
                                                     <td>{{ teamMember.role }}</td>
                                                     <td width="8%">
                                                         <form method="post" action="/dashboard/team/delete">

@@ -58,6 +58,36 @@ class Team extends AbstractController
     }
 
     /**
+     * @Route("/dashboard/team/edit/{id}", name="dashboard_team_edit", methods={"GET"})
+     */
+    public function edit(int $id): Response
+    {
+        $teamMember = $this->repository->getById($id);
+
+        if ($teamMember) {
+            return $this->render('Admin/admin_members_edit.html.twig', ['teamMember' => $teamMember]);
+        }
+    }
+
+    /**
+     * @Route("/dashboard/team/update", name="dashboard_team_update", methods={"POST"})
+     */
+    public function update(Request $request): Response
+    {
+        $teamMember = $request->request->all();
+
+        if ($teamMember) {
+            $this->repository->update($teamMember);
+
+            return $this->render('Admin/admin_members_edit.html.twig', [
+                'teamMember' => $teamMember,
+                'success' => true,
+                'message' => 'Successfully updated team member'
+            ]);
+        }
+    }
+
+    /**
      * @Route("/dashboard/team/delete", name="dashboard_team_delete", methods={"POST"})
      */
     public function delete(Request $request): Response

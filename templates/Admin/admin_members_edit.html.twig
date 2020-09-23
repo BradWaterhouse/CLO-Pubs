@@ -1,0 +1,76 @@
+{% extends "Admin/admin_base.html.twig" %}
+{% block content %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Edit Team Members</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+
+                    {% if success is defined %}
+                        {% if success == true %}
+                            <div class="alert alert-success text-center mb-3" role="alert">
+                                <p> {{ message }} Click <b><a class="link-text" href="/dashboard/team">here</a></b> to return to the members page</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if success is defined %}
+                        {% if success == false %}
+                            <div class="alert alert-danger text-center mb-3" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar mr-1"></i>
+                                    Edit <b>{{ teamMember.name }}</b>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/dashboard/team/update" method="post">
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput">Name</label>
+                                            <input type="text" class="form-control" name="name" id="name" value="{{ teamMember.name }}" required placeholder="Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Position</label>
+                                            <input type="text" class="form-control" name="role" id="role" value="{{ teamMember.role }}" required placeholder="Position">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Bio</label>
+                                            <textarea class="form-control" id="bio" name="bio" rows="3" required placeholder="Description of person">{{ teamMember.bio }}</textarea>
+                                        </div>
+                                        <input hidden type="text" value="{{ teamMember.id }}" name="id" id="id">
+                                        <button type="submit" class="btn blue-background text-white mb-2">Update</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; CLO Pubs LTD 2020</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    </body>
+
+{% endblock %}

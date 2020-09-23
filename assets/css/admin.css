@@ -27,3 +27,23 @@
 .blue-background {
     background-color: #77a3c4;
 }
+
+/* unvisited link */
+a:link {
+    color: #77a3c4;
+}
+
+/* visited link */
+a:visited {
+    color: #77a3c4;
+}
+
+/* mouse over link */
+a:hover {
+    color: #77a3c4;
+}
+
+/* selected link */
+a:active {
+    color: #77a3c4;
+}

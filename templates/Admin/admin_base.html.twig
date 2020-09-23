@@ -23,7 +23,7 @@
             <li {% if route_name == "dashboard" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                 <a class="nav-link" href="{{ path('dashboard') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li {% if route_name == "dashboard_team" %} class="nav-item active pl-2" {% else %} class="nav-item pl-2" {% endif %}>
+            <li {% if route_name == "dashboard_team" or "dashboard_team_edit" %} class="nav-item active pl-2" {% else %} class="nav-item pl-2" {% endif %}>
                 <a class="nav-link" href="{{ path('dashboard_team') }}">Add/Edit Team Members</a>
             </li>
             <li {% if route_name == "dashboard_pubs" %} class="nav-item active pl-2" {% else %} class="nav-item pl-2" {% endif %}>

@@ -32,6 +32,25 @@ class Team
         return [];
     }
 
+    public function getById(int $id): array
+    {
+        $statement = $this->connection->prepare('
+            SELECT id, name, role, bio, image
+            FROM team
+            WHERE id = ?
+        ');
+
+        $statement->execute([$id]);
+
+        $results = $statement->fetch(FetchMode::ASSOCIATIVE);
+
+        if ($results) {
+            return $results;
+        }
+
+        return [];
+    }
+
     public function add(string $name, string $role, string $bio): void
     {
         $statement = $this->connection->prepare('INSERT INTO team (name, role, bio) VALUES (:name, :role, :bio)');
@@ -40,6 +59,18 @@ class Team
             'name' => $name,
             'role' => $role,
             'bio' => $bio
+        ]);
+    }
+
+    public function update(array $teamMember): void
+    {
+        $statement = $this->connection->prepare('UPDATE team SET name = :name, role = :role, bio = :bio WHERE id = :id');
+
+        $statement->execute([
+            'name' => $teamMember['name'],
+            'role' => $teamMember['role'],
+            'bio' => $teamMember['bio'],
+            'id' => $teamMember['id']
         ]);
     }
 
