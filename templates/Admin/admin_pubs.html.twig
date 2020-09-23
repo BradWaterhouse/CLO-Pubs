@@ -76,7 +76,7 @@
                                                 <tbody>
                                                 {% for pub in pubs %}
                                                 <tr>
-                                                    <td>{{ pub.name }}</td>
+                                                    <td><a href="/dashboard/pub/{{ pub.id }}">{{ pub.name }}</a></td>
                                                     <td>{{ pub.town }}</td>
                                                     <td width="8%">
                                                         <form method="post" action="/dashboard/pub/delete">

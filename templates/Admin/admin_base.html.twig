@@ -1,3 +1,5 @@
+{% set route_name = app.request.attributes.get('_route') %}
+
 <!doctype html>
 <head>
     <meta charset="utf-8">
@@ -16,19 +18,18 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li {% if route_name == "dashboard" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                 <a class="nav-link" href="{{ path('dashboard') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item pl-2">
+            <li {% if route_name == "dashboard_team" %} class="nav-item active pl-2" {% else %} class="nav-item pl-2" {% endif %}>
                 <a class="nav-link" href="{{ path('dashboard_team') }}">Add/Edit Team Members</a>
             </li>
-            <li class="nav-item pl-2">
+            <li {% if route_name == "dashboard_pubs" %} class="nav-item active pl-2" {% else %} class="nav-item pl-2" {% endif %}>
                 <a class="nav-link" href="{{ path('dashboard_pubs') }}">Add/Edit Pubs</a>
             </li>
-            <li class="nav-item pl-2">
+            <li {% if route_name == "dashboard_jobs" %} class="nav-item active pl-2" {% else %} class="nav-item pl-2" {% endif %}>
                 <a class="nav-link" href="{{ path('dashboard_jobs') }}">Add/Edit Jobs</a>
             </li>
             <li class="nav-item pl-2">

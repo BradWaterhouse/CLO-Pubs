@@ -53,14 +53,14 @@ class Pubs extends AbstractController
             return $this->render('Admin/admin_pubs.html.twig', [
                 'pubs' => $this->repository->getAll(),
                 'success' => true,
-                'message' => 'Team member added.'
+                'message' => 'Pub added.'
             ]);
         }
 
         return $this->render('Admin/admin_pubs.html.twig', [
             'pubs' => $this->repository->getAll(),
             'success' => false,
-            'message' => 'Team member could not be added.'
+            'message' => 'Pub could not be added.'
         ]);
     }
 
