@@ -92,18 +92,14 @@ class Jobs extends AbstractController
                 $this->repository->addRequirement($jobId, $requirement);
             }
 
-            return $this->render('Admin/admin_jobs.html.twig', [
-                'jobs' => $this->repository->getAll(),
-                'success' => true,
-                'message' => 'Job advert added.'
-            ]);
+            $this->addFlash('success', 'Successfully added job advert');
+
+            return $this->redirect('/dashboard/jobs');
 
         } catch (Exception $exception) {
-            return $this->render('Admin/admin_jobs.html.twig', [
-                'jobs' => $this->repository->getAll(),
-                'success' => false,
-                'message' => 'Unable to add job advert.'
-            ]);
+            $this->addFlash('error', 'Failed to add job advert');
+
+            return $this->redirect('/dashboard/jobs');
         }
     }
 
@@ -114,10 +110,8 @@ class Jobs extends AbstractController
     {
         $this->repository->delete((int) $request->get('id'));
 
-        return $this->render('Admin/admin_jobs.html.twig', [
-            'jobs' => $this->repository->getAll(),
-            'success' => true,
-            'message' => 'Job advert deleted.'
-        ]);
+        $this->addFlash('success', 'Successfully deleted job advert');
+
+        return $this->redirect('/dashboard/jobs');
     }
 }

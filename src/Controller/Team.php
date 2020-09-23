@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Repository\Team as Repository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,18 +44,10 @@ class Team extends AbstractController
         if ($request->get('name') && $request->get('role') && $request->get('bio') ) {
             $this->repository->add($request->get('name'), $request->get('role'), $request->get('bio'));
 
-            return $this->render('Admin/admin_members.html.twig', [
-                'team' => $this->repository->getAll(),
-                'success' => true,
-                'message' => 'Team member added.'
-            ]);
-        }
+            $this->addFlash('success', 'Successfully added team member');
 
-        return $this->render('Admin/admin_members.html.twig', [
-            'team' => $this->repository->getAll(),
-            'success' => false,
-            'message' => 'Team member could not be added.'
-        ]);
+            return $this->redirect('/dashboard/team');
+        }
     }
 
     /**
@@ -79,11 +72,8 @@ class Team extends AbstractController
         if ($teamMember) {
             $this->repository->update($teamMember);
 
-            return $this->render('Admin/admin_members_edit.html.twig', [
-                'teamMember' => $teamMember,
-                'success' => true,
-                'message' => 'Successfully updated team member,'
-            ]);
+            $this->addFlash('success', 'Successfully updated team member');
+            return $this->redirect('/dashboard/team/edit/' . $teamMember['id']);
         }
     }
 
@@ -95,17 +85,13 @@ class Team extends AbstractController
         if ($request->get('id')) {
             $this->repository->delete((int) $request->get('id'));
 
-            return $this->render('Admin/admin_members.html.twig', [
-                'team' => $this->repository->getAll(),
-                'success' => true,
-                'message' => 'Team member deleted.'
-            ]);
+            $this->addFlash('success', 'Successfully deleted team member');
+
+            return $this->redirect('/dashboard/team');
         }
 
-        return $this->render('Admin/admin_members.html.twig', [
-            'team' => $this->repository->getAll(),
-            'success' => false,
-            'message' => 'Team member could not be deleted.'
-        ]);
+        $this->addFlash('error', 'Failed To delete team member');
+
+        return $this->redirect('/dashboard/team');
     }
 }

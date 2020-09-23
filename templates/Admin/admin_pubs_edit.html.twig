@@ -9,21 +9,11 @@
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
 
-                    {% if success is defined %}
-                        {% if success == true %}
-                            <div class="alert alert-success text-center mb-3" role="alert">
-                                <p> {{ message }} Click <b><a class="link-text" href="/dashboard/pubs">here</a></b> to return to the pubs page</p>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-
-                    {% if success is defined %}
-                        {% if success == false %}
-                            <div class="alert alert-danger text-center mb-3" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endif %}
-                    {% endif %}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 
                     <div class="row">
                         <div class="col-xl-12">

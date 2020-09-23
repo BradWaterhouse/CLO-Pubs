@@ -149,13 +149,13 @@ class Job
 
     public function delete(int $jobId): void
     {
-        $statement = $this->connection->prepare('DELETE FROM job where id = ?');
-        $statement->execute([$jobId]);
-
         $statement = $this->connection->prepare('DELETE FROM job_requirements WHERE job_id = ?');
         $statement->execute([$jobId]);
 
         $statement = $this->connection->prepare('DELETE FROM job_expectations WHERE job_id = ?');
+        $statement->execute([$jobId]);
+
+        $statement = $this->connection->prepare('DELETE FROM job where id = ?');
         $statement->execute([$jobId]);
     }
 

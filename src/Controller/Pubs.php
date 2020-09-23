@@ -50,18 +50,12 @@ class Pubs extends AbstractController
 
             $this->repository->add($pub);
 
-            return $this->render('Admin/admin_pubs.html.twig', [
-                'pubs' => $this->repository->getAll(),
-                'success' => true,
-                'message' => 'Pub added.'
-            ]);
+            $this->addFlash('success', 'Successfully added pub');
+            return $this->redirect('/dashboard/pubs');
         }
 
-        return $this->render('Admin/admin_pubs.html.twig', [
-            'pubs' => $this->repository->getAll(),
-            'success' => false,
-            'message' => 'Pub could not be added.'
-        ]);
+        $this->addFlash('error', 'Failed to add pub');
+        return $this->redirect('/dashboard/pubs');
     }
 
     /**
@@ -85,11 +79,9 @@ class Pubs extends AbstractController
 
         if ($pub) {
             $this->repository->update($pub);
-            return $this->render('Admin/admin_pubs_edit.html.twig', [
-                'pub' => $pub,
-                'success' => true,
-                'message' => 'Successfully updated pub,'
-            ]);
+            $this->addFlash('success', 'Successfully edited pub');
+
+            return $this->redirect('/dashboard/pub/edit/' . $pub['id']);
         }
     }
 
@@ -101,17 +93,11 @@ class Pubs extends AbstractController
         if ($request->get('id')) {
             $this->repository->delete((int) $request->get('id'));
 
-            return $this->render('Admin/admin_pubs.html.twig', [
-                'pubs' => $this->repository->getAll(),
-                'success' => true,
-                'message' => 'Pub deleted.'
-            ]);
+            $this->addFlash('success', 'Successfully deleted pub');
+            return $this->redirect('/dashboard/pubs');
         }
 
-        return $this->render('Admin/admin_pubs.html.twig', [
-            'pubs' => $this->repository->getAll(),
-            'success' => false,
-            'message' => 'Pub could not be deleted.'
-        ]);
+        $this->addFlash('error', 'Failed to delete pub');
+        return $this->redirect('/dashboard/pubs');
     }
 }
