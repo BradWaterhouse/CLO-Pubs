@@ -51,6 +51,13 @@ class Pub
         return [];
     }
 
+    public function getCount(): int
+    {
+        $statement = $this->connection->query('SELECT COUNT(*) FROM pub');
+
+        return (int) $statement->fetch(FetchMode::COLUMN);
+    }
+
     public function add(array $pub): void
     {
         $statement = $this->connection->prepare('INSERT INTO pub (name, town, postcode, description) VALUES (:name, :town, :postcode, :description)');

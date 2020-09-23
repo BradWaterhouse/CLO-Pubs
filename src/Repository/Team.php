@@ -51,6 +51,13 @@ class Team
         return [];
     }
 
+    public function getCount(): int
+    {
+        $statement = $this->connection->query('SELECT COUNT(*) FROM team');
+
+        return (int) $statement->fetch(FetchMode::COLUMN);
+    }
+
     public function add(string $name, string $role, string $bio): void
     {
         $statement = $this->connection->prepare('INSERT INTO team (name, role, bio) VALUES (:name, :role, :bio)');

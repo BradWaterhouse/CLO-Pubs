@@ -32,6 +32,13 @@ class Job
         return [];
     }
 
+    public function getCount(): int
+    {
+        $statement = $this->connection->query('SELECT COUNT(*) FROM job');
+
+        return (int) $statement->fetch(FetchMode::COLUMN);
+    }
+
     public function getById(int $id): array
     {
         $statement = $this->connection->prepare('
