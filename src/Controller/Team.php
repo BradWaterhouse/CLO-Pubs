@@ -82,7 +82,7 @@ class Team extends AbstractController
             return $this->render('Admin/admin_members_edit.html.twig', [
                 'teamMember' => $teamMember,
                 'success' => true,
-                'message' => 'Successfully updated team member'
+                'message' => 'Successfully updated team member,'
             ]);
         }
     }

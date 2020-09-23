@@ -65,6 +65,35 @@ class Pubs extends AbstractController
     }
 
     /**
+     * @Route("/dashboard/pub/edit/{id}", name="dashboard_pub_edit", methods={"GET"})
+     */
+    public function edit(int $id): Response
+    {
+        $pub = $this->repository->getById($id);
+
+        if ($pub) {
+            return $this->render('Admin/admin_pubs_edit.html.twig', ['pub' => $pub]);
+        }
+    }
+
+    /**
+     * @Route("/dashboard/pub/update", name="dashboard_pub_update", methods={"POST"})
+     */
+    public function update(Request $request): Response
+    {
+        $pub = $request->request->all();
+
+        if ($pub) {
+            $this->repository->update($pub);
+            return $this->render('Admin/admin_pubs_edit.html.twig', [
+                'pub' => $pub,
+                'success' => true,
+                'message' => 'Successfully updated pub,'
+            ]);
+        }
+    }
+
+    /**
      * @Route("/dashboard/pub/delete", name="dashboard_pub_delete", methods={"POST"})
      */
     public function delete(Request $request): Response

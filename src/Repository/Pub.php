@@ -32,6 +32,25 @@ class Pub
         return [];
     }
 
+    public function getById(int $id): array
+    {
+        $statement = $this->connection->prepare('
+            SELECT id, name, town, postcode, image, stars, description
+            FROM pub
+            WHERE id = ?
+        ');
+
+        $statement->execute([$id]);
+
+        $results = $statement->fetch(FetchMode::ASSOCIATIVE);
+
+        if ($results) {
+            return $results;
+        }
+
+        return [];
+    }
+
     public function add(array $pub): void
     {
         $statement = $this->connection->prepare('INSERT INTO pub (name, town, postcode, description) VALUES (:name, :town, :postcode, :description)');
@@ -41,6 +60,23 @@ class Pub
             'town' => $pub['town'],
             'postcode' => $pub['postcode'],
             'description' => $pub['description']
+        ]);
+    }
+
+    public function update(array $pub): void
+    {
+        $statement = $this->connection->prepare('
+            UPDATE pub
+            SET name = :name, town = :town, postcode = :postcode, description = :description
+            WHERE id = :id
+       ');
+
+        $statement->execute([
+            'name' => $pub['name'],
+            'town' => $pub['town'],
+            'postcode' => $pub['postcode'],
+            'description' => $pub['description'],
+            'id' => $pub['id']
         ]);
     }
 
