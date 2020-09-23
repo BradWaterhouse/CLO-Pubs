@@ -8,6 +8,23 @@
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
+
+                    {% if success is defined %}
+                        {% if success == true %}
+                            <div class="alert alert-success text-center mb-3" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if success is defined %}
+                        {% if success == false %}
+                            <div class="alert alert-danger text-center mb-3" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card mb-4">
@@ -16,24 +33,24 @@
                                     Add New Pub
                                 </div>
                                 <div class="card-body">
-                                    <form>
+                                    <form action="/dashboard/pubs/add" method="post">
                                         <div class="form-group">
                                             <label for="formGroupExampleInput">Name</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Town</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Town">
+                                            <input type="text" class="form-control" id="town" name="town" placeholder="Town">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Postcode</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Postcode">
+                                            <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Description</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description of person / position"></textarea>
+                                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description of person / position"></textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mb-2">Add Pub</button>
+                                        <button type="submit" class="btn blue-background text-white mb-2">Add Pub</button>
                                     </form>
                                 </div>
                             </div>
@@ -57,27 +74,18 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                {% for pub in pubs %}
                                                 <tr>
-                                                    <td>The Rifle</td>
-                                                    <td>Sutton in Ashfield</td>
+                                                    <td>{{ pub.name }}</td>
+                                                    <td>{{ pub.town }}</td>
                                                     <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                                                        <form method="post" action="/dashboard/pub/delete">
+                                                            <input type="hidden" class="form-control" name="id" id="id" value="{{ pub.id }}">
+                                                            <button type="submit" class="btn blue-background text-white btn-sm">Delete</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>The Maypole</td>
-                                                    <td>Sutton In Ashfield</td>
-                                                    <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>The Fox & Crown</td>
-                                                    <td>Skegby</td>
-                                                    <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                                    </td>
-                                                </tr>
+                                                {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>

@@ -31,4 +31,21 @@ class Team
 
         return [];
     }
+
+    public function add(string $name, string $role, string $bio): void
+    {
+        $statement = $this->connection->prepare('INSERT INTO team (name, role, bio) VALUES (:name, :role, :bio)');
+
+        $statement->execute([
+            'name' => $name,
+            'role' => $role,
+            'bio' => $bio
+        ]);
+    }
+
+    public function delete(int $id): void
+    {
+        $statement = $this->connection->prepare('DELETE FROM team WHERE id = ?');
+        $statement->execute([$id]);
+    }
 }

@@ -8,6 +8,23 @@
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
+
+                    {% if success is defined %}
+                        {% if success == true %}
+                            <div class="alert alert-success text-center mb-3" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if success is defined %}
+                        {% if success == false %}
+                            <div class="alert alert-danger text-center mb-3" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card mb-4">
@@ -16,20 +33,20 @@
                                     Add New Member
                                 </div>
                                 <div class="card-body">
-                                    <form>
+                                    <form action="/dashboard/team/add" method="post">
                                         <div class="form-group">
                                             <label for="formGroupExampleInput">Name</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name">
+                                            <input type="text" class="form-control" name="name" id="name" required placeholder="Name">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Position</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Position">
+                                            <input type="text" class="form-control" name="role" id="role" required placeholder="Position">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Bio</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description of person / position"></textarea>
+                                            <textarea class="form-control" id="bio" name="bio" rows="3" required placeholder="Description of person / position"></textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mb-2">Add Member</button>
+                                        <button type="submit" class="btn blue-background text-white mb-2">Add Member</button>
                                     </form>
                                 </div>
                             </div>
@@ -53,42 +70,21 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                {% for teamMember in team %}
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
+                                                    <a href="/dashboard/team/{{ teamMember.id }}">
+                                                        <td>{{ teamMember.name }}</td>
+                                                    </a>
+                                                    <td>{{ teamMember.role }}</td>
                                                     <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Garrett Winters</td>
-                                                    <td>Accountant</td>
-                                                    <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ashton Cox</td>
-                                                    <td>Junior Technical Author</td>
-                                                    <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cedric Kelly</td>
-                                                    <td>Senior Javascript Developer</td>
-                                                    <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Airi Satou</td>
-                                                    <td>Accountant</td>
-                                                    <td width="8%">
-                                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                                                        <form method="post" action="/dashboard/team/delete">
+                                                            <input type="hidden" class="form-control" name="id" id="id" value="{{ teamMember.id }}">
+                                                            <button type="submit" class="btn blue-background text-white btn-sm">Delete</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                                 </tbody>
+                                                {% endfor %}
                                             </table>
                                         </div>
                                     </div>
