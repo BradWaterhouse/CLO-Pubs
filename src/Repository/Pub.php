@@ -19,7 +19,7 @@ class Pub
     public function getAll(): array
     {
         $statement = $this->connection->query('
-            SELECT id, name, town, postcode, image, stars
+            SELECT id, name, town, postcode, image, stars, description
             FROM pub
         ');
 

@@ -30,16 +30,16 @@ body {
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #68a59f;
-    border-color: #68a59f;
+    background-color: #498fc4;
+    border-color: #77a3c4;
     box-shadow: none;
     outline: none;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #7fcac3;
-    border-color: #7fcac3;
+    background-color: #77a3c4;
+    border-color: #77a3c4;
 }
 
 section {
@@ -152,5 +152,5 @@ section .section-title {
 }
 
 .star-bg {
-    color: #68A59F;
+    color: #498fc4;
 }

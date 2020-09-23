@@ -89,6 +89,24 @@ class Job
         return [];
     }
 
+    public function apply(array $application): void
+    {
+        $statement = $this->connection->prepare('
+            INSERT INTO job_applicants (job_id, name, email, question_one, question_two, question_three, question_four)
+            VALUES (:job_id, :name, :email, :question_one, :question_two, :question_three, :question_four)
+       ');
+
+        $statement->execute([
+            'job_id' => (int) $application['id'],
+            'name' => $application['name'],
+            'email' => $application['email'],
+            'question_one' => $application['personal_licence'],
+            'question_two' => $application['cellar_knowledge'],
+            'question_three' => $application['experience'],
+            'question_four' => $application['relocate']
+        ]);
+    }
+
     public function add(array $job): int
     {
         $statement = $this->connection->prepare('

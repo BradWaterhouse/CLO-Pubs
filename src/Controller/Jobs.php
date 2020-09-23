@@ -53,6 +53,18 @@ class Jobs extends AbstractController
     }
 
     /**
+     * @Route("/job/send", name="send", methods={"POST"})
+     */
+    public function send(Request $request): Response
+    {
+        $application = $request->request->all();
+
+        $this->repository->apply($application);
+
+        return $this->render('Pages/applied.html.twig');
+    }
+
+    /**
      * @Route("/dashboard/jobs", name="dashboard_jobs", methods={"GET"})
      */
     public function show(): Response
