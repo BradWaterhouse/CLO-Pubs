@@ -4,7 +4,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Team Members</h1>
+                    <h1 class="mt-4">Jobs</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
@@ -30,23 +30,57 @@
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-chart-bar mr-1"></i>
-                                    Add New Member
+                                    Add Job Advert
                                 </div>
                                 <div class="card-body">
-                                    <form action="/dashboard/team/add" method="post">
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput">Name</label>
-                                            <input type="text" class="form-control" name="name" id="name" required placeholder="Name">
+                                    <form action="/dashboard/job/add" method="post">
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="inputNamel4">Pub Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="inputEmail4">Job Title</label>
+                                                <input type="text" class="form-control" id="title" name="title" placeholder="Position">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="formGroupExampleInput2">Salary Range</label>
+                                                <input type="text" class="form-control" id="salary" name="salary" placeholder="£20000 - £23000">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputNamel4">Town</label>
+                                                <input type="text" class="form-control" id="town" name="town" placeholder="Town">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Postcode</label>
+                                                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode">
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="formGroupExampleInput2">Position</label>
-                                            <input type="text" class="form-control" name="role" id="role" required placeholder="Position">
+                                            <label for="exampleFormControlTextarea1">Description</label>
+                                            <textarea class="form-control" id="description" name="description" rows="2" placeholder="Description of position"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Bio</label>
-                                            <textarea class="form-control" id="bio" name="bio" rows="3" required placeholder="Description of person"></textarea>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleFormControlTextarea1">Requirements</label>
+                                                <textarea class="form-control" id="requirements" name="requirements" rows="4" placeholder="Requirements"></textarea>
+                                                <small class="text-muted">Each new line will be saved as a new requirement bullet point.</small>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleFormControlTextarea1">Expectations</label>
+                                                <textarea class="form-control" id="expectations" name="expectations" rows="4" placeholder="Expectations"></textarea>
+                                                <small class="text-muted">Each new line will be saved as a new experience bullet point.</small>
+                                            </div>
                                         </div>
-                                        <button type="submit" class="btn blue-background text-white mb-2">Add Member</button>
+                                        <div class="form-check mb-3">
+                                            <input type="checkbox" class="form-check-input mb-3" id="active" name="active" checked>
+                                            <label class="form-check-label" for="exampleCheck1">Active</label><br>
+                                            <small class="text-muted">If ticked, the job will show up on the website.</small>
+                                        </div>
+                                        <button type="submit" class="btn blue-background text-white mb-2">Add Job</button>
                                     </form>
                                 </div>
                             </div>
@@ -56,7 +90,7 @@
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-chart-area mr-1"></i>
-                                    Existing Team Members
+                                    Current Job Adverts
                                 </div>
                                 <div class="card-body">
                                     <div class="card-body">
@@ -65,26 +99,24 @@
                                                 <thead class="titles-header">
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Position</th>
+                                                    <th>Town</th>
                                                     <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {% for teamMember in team %}
+                                                {% for job in jobs %}
                                                 <tr>
-                                                    <a href="/dashboard/team/{{ teamMember.id }}">
-                                                        <td>{{ teamMember.name }}</td>
-                                                    </a>
-                                                    <td>{{ teamMember.role }}</td>
+                                                    <td>{{ job.title }}</td>
+                                                    <td>{{ job.role }}</td>
                                                     <td width="8%">
-                                                        <form method="post" action="/dashboard/team/delete">
-                                                            <input type="hidden" class="form-control" name="id" id="id" value="{{ teamMember.id }}">
+                                                        <form method="post" action="/dashboard/job/delete">
+                                                            <input type="hidden" class="form-control" name="id" id="id" value="{{ job.id }}">
                                                             <button type="submit" class="btn blue-background text-white btn-sm">Delete</button>
                                                         </form>
                                                     </td>
                                                 </tr>
-                                                </tbody>
                                                 {% endfor %}
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>

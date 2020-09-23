@@ -41,7 +41,6 @@ class Pubs extends AbstractController
     public function add(Request $request): Response
     {
         if ($request->get('name') && $request->get('town') && $request->get('postcode') && $request->get('description')) {
-
             $pub = [
                 'name' => $request->get('name'),
                 'town' => $request->get('town'),
