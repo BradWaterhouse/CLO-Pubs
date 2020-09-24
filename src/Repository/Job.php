@@ -21,6 +21,7 @@ class Job
         $statement = $this->connection->query('
             SELECT id, title, role, town, postcode, active, description, salary
             FROM job
+            WHERE active = 1
         ');
 
         $results = $statement->fetchAll(FetchMode::ASSOCIATIVE);
@@ -80,8 +81,8 @@ class Job
     public function getRequirements(int $id): array
     {
         $statement = $this->connection->prepare('
-            SELECT expectation
-            FROM job_expectations
+            SELECT requirement
+            FROM job_requirements
             WHERE job_id = ?
         ');
 
@@ -154,15 +155,40 @@ class Job
         ]);
     }
 
+    public function updateJob(array $job): void
+    {
+        $statement = $this->connection->prepare('
+            UPDATE job
+            SET
+            title = :name,
+            role = :title,
+            town = :town,
+            postcode = :postcode,
+            description = :description,
+            active = :active,
+            salary = :salary
+            WHERE id = :id
+        ');
+
+        $statement->execute([
+            'name' => $job['name'],
+            'title' => $job['title'],
+            'town' => $job['town'],
+            'postcode' => $job['postcode'],
+            'description' => $job['description'],
+            'active' => (\array_key_exists('active', $job) ? 1 : 0),
+            'salary' => $job['salary'],
+            'id' => $job['id']
+        ]);
+    }
+
     public function delete(int $jobId): void
     {
-        $statement = $this->connection->prepare('DELETE FROM job_requirements WHERE job_id = ?');
-        $statement->execute([$jobId]);
+        $this->deleteExpectations($jobId);
+        $this->deleteRequirements($jobId);
+        $this->deleteApplications($jobId);
 
-        $statement = $this->connection->prepare('DELETE FROM job_expectations WHERE job_id = ?');
-        $statement->execute([$jobId]);
-
-        $statement = $this->connection->prepare('DELETE FROM job where id = ?');
+        $statement = $this->connection->prepare('DELETE FROM job WHERE id = ?');
         $statement->execute([$jobId]);
     }
 
@@ -173,5 +199,23 @@ class Job
         }
 
         return 0;
+    }
+
+    public function deleteExpectations(int $jobId): void
+    {
+        $statement = $this->connection->prepare('DELETE FROM job_expectations WHERE job_id = ?');
+        $statement->execute([$jobId]);
+    }
+
+    public function deleteRequirements(int $jobId): void
+    {
+        $statement = $this->connection->prepare('DELETE FROM job_requirements WHERE job_id = ?');
+        $statement->execute([$jobId]);
+    }
+
+    private function deleteApplications(int $jobId): void
+    {
+        $statement = $this->connection->prepare('DELETE FROM job_applicants WHERE job_id = ?');
+        $statement->execute([$jobId]);
     }
 }
