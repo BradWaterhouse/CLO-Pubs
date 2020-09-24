@@ -1,0 +1,78 @@
+{% extends "Admin/admin_base.html.twig" %}
+{% block content %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                    <h1 class="mt-4">{{ job.title }} - {{ job.role }}</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {% for applicant in applicants %}
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar mr-1"></i>
+                                <b>Brad Waterhouse</b>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-row col-12 mb-4">
+                                    <div class="col-md-4">
+                                        <b>Name</b>
+                                        <p>{{ applicant.name }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <b>Email</b>
+                                        <p>{{ applicant.email }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <b>Do you have a personal licence, if so how long have you held it for?</b>
+                                    <p>{{ applicant.question_one }}</p>
+                                </div>
+                                <div class="col-12">
+                                    <b>How is your cellar knowledge?</b>
+                                    <p>{{ applicant.question_two }}</p>
+                                </div>
+                                <div class="col-12">
+                                    <b>How many years experience do you have in a pub management role?</b>
+                                    <p>{{ applicant.question_three }}</p>
+                                </div>
+                                <div class="col-12">
+                                    <b>Would you be willing to relocate, if so what is your preferred area?</b>
+                                    <p>{{ applicant.question_four }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+
+
+               </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; CLO Pubs LTD 2020</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    </body>
+
+{% endblock %}
