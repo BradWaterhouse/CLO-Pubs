@@ -27,6 +27,10 @@ class Dashboard extends AbstractController
      */
     public function index(Pub $pub, Team $team, Job $job, Applicants $applicant): Response
     {
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
+
         if ($this->session->get('logged_in')) {
             return $this->render('Admin/dashboard.html.twig', [
                 'pubCount'=> $pub->getCount(),

@@ -35,7 +35,9 @@ class Pubs extends AbstractController
      */
     public function show(): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         return $this->render('Admin/admin_pubs.html.twig', ['pubs' => $this->repository->getAll()]);
     }
@@ -45,7 +47,9 @@ class Pubs extends AbstractController
      */
     public function add(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         if ($request->get('name') && $request->get('town') && $request->get('postcode') && $request->get('description')) {
             $pub = [
@@ -70,7 +74,9 @@ class Pubs extends AbstractController
      */
     public function edit(int $id): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $pub = $this->repository->getById($id);
 
@@ -84,7 +90,9 @@ class Pubs extends AbstractController
      */
     public function update(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $pub = $request->request->all();
 
@@ -101,7 +109,9 @@ class Pubs extends AbstractController
      */
     public function delete(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         if ($request->get('id')) {
             $this->repository->delete((int) $request->get('id'));
@@ -112,14 +122,5 @@ class Pubs extends AbstractController
 
         $this->addFlash('error', 'Failed to delete pub');
         return $this->redirect('/dashboard/pubs');
-    }
-
-    private function isLoggedIn(): ?Response
-    {
-        if (!$this->session->get('logged_in')) {
-            return $this->redirect('/admin');
-        }
-
-        return null;
     }
 }

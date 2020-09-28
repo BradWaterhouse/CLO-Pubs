@@ -72,7 +72,9 @@ class Jobs extends AbstractController
      */
     public function show(): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         return $this->render('Admin/admin_jobs.html.twig', ['jobs' => $this->repository->getAll()]);
     }
@@ -82,7 +84,9 @@ class Jobs extends AbstractController
      */
     public function add(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         try {
             $job = $request->request->all();
@@ -115,7 +119,9 @@ class Jobs extends AbstractController
      */
     public function edit(int $id): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $job = $this->formatChecked($this->repository->getById($id));
 
@@ -137,7 +143,9 @@ class Jobs extends AbstractController
      */
     public function updateJob(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $job = $request->request->all();
 
@@ -157,7 +165,9 @@ class Jobs extends AbstractController
      */
     public function updateRequirements(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $requirements = $request->get('requirements');
         $jobId = (int) $request->get('id');
@@ -184,7 +194,9 @@ class Jobs extends AbstractController
      */
     public function updateExpectations(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $expectations = $request->get('expectations');
         $jobId = (int) $request->get('id');
@@ -211,7 +223,9 @@ class Jobs extends AbstractController
      */
     public function delete(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $this->repository->delete((int) $request->get('id'));
 
@@ -233,14 +247,5 @@ class Jobs extends AbstractController
         }
 
         return [];
-    }
-
-    private function isLoggedIn(): ?Response
-    {
-        if ($this->session->get('logged_in', false)) {
-            return $this->redirect('/admin');
-        }
-
-        return null;
     }
 }

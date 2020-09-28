@@ -36,7 +36,9 @@ class Team extends AbstractController
      */
     public function dashboard(): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         return $this->render('Admin/admin_members.html.twig', ['team' => $this->repository->getAll()]);
     }
@@ -46,7 +48,9 @@ class Team extends AbstractController
      */
     public function add(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         if ($request->get('name') && $request->get('role') && $request->get('bio') ) {
             $this->repository->add($request->get('name'), $request->get('role'), $request->get('bio'));
@@ -62,7 +66,9 @@ class Team extends AbstractController
      */
     public function edit(int $id): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $teamMember = $this->repository->getById($id);
 
@@ -76,7 +82,9 @@ class Team extends AbstractController
      */
     public function update(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         $teamMember = $request->request->all();
 
@@ -93,7 +101,9 @@ class Team extends AbstractController
      */
     public function delete(Request $request): Response
     {
-        $this->isLoggedIn();
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
 
         if ($request->get('id')) {
             $this->repository->delete((int) $request->get('id'));
@@ -106,14 +116,5 @@ class Team extends AbstractController
         $this->addFlash('error', 'Failed To delete team member');
 
         return $this->redirect('/dashboard/team');
-    }
-
-    private function isLoggedIn(): ?Response
-    {
-        if (!$this->session->get('logged_in')) {
-            return $this->redirect('/admin');
-        }
-
-        return null;
     }
 }

@@ -29,6 +29,10 @@ class Applicants extends AbstractController
      */
     public function index(): Response
     {
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
+
         $jobs = $this->jobs->getAll();
 
         return $this->render('Admin/admin_applicants.html.twig',['jobs' => $jobs]);
@@ -39,18 +43,12 @@ class Applicants extends AbstractController
      */
     public function applicants(int $id): Response
     {
-        $this->isLoggedIn();
-        $applicants = $this->applicants->getApplicants($id);
-
-        return $this->render('Admin/admin_applicants_view.html.twig', ['applicants' => $applicants, 'job' => $this->jobs->getById($id)]);
-    }
-
-    private function isLoggedIn(): ?Response
-    {
         if (!$this->session->get('logged_in')) {
             return $this->redirect('/admin');
         }
 
-        return null;
+        $applicants = $this->applicants->getApplicants($id);
+
+        return $this->render('Admin/admin_applicants_view.html.twig', ['applicants' => $applicants, 'job' => $this->jobs->getById($id)]);
     }
 }
