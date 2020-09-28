@@ -9,14 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class Team extends AbstractController
 {
+    private SessionInterface $session;
     private Repository $repository;
 
-    public function __construct(Repository $repository)
+    public function __construct(SessionInterface $session, Repository $repository)
     {
+        $this->session = $session;
         $this->repository = $repository;
     }
 
@@ -33,6 +36,8 @@ class Team extends AbstractController
      */
     public function dashboard(): Response
     {
+        $this->isLoggedIn();
+
         return $this->render('Admin/admin_members.html.twig', ['team' => $this->repository->getAll()]);
     }
 
@@ -41,6 +46,8 @@ class Team extends AbstractController
      */
     public function add(Request $request): Response
     {
+        $this->isLoggedIn();
+
         if ($request->get('name') && $request->get('role') && $request->get('bio') ) {
             $this->repository->add($request->get('name'), $request->get('role'), $request->get('bio'));
 
@@ -55,6 +62,8 @@ class Team extends AbstractController
      */
     public function edit(int $id): Response
     {
+        $this->isLoggedIn();
+
         $teamMember = $this->repository->getById($id);
 
         if ($teamMember) {
@@ -67,6 +76,8 @@ class Team extends AbstractController
      */
     public function update(Request $request): Response
     {
+        $this->isLoggedIn();
+
         $teamMember = $request->request->all();
 
         if ($teamMember) {
@@ -82,6 +93,8 @@ class Team extends AbstractController
      */
     public function delete(Request $request): Response
     {
+        $this->isLoggedIn();
+
         if ($request->get('id')) {
             $this->repository->delete((int) $request->get('id'));
 
@@ -93,5 +106,14 @@ class Team extends AbstractController
         $this->addFlash('error', 'Failed To delete team member');
 
         return $this->redirect('/dashboard/team');
+    }
+
+    private function isLoggedIn(): ?Response
+    {
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
+
+        return null;
     }
 }

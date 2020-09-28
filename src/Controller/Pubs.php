@@ -8,14 +8,17 @@ use App\Repository\Pub;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class Pubs extends AbstractController
 {
+    private SessionInterface $session;
     private Pub $repository;
 
-    public function __construct(Pub $repository)
+    public function __construct(SessionInterface  $session, Pub $repository)
     {
+        $this->session = $session;
         $this->repository = $repository;
     }
 
@@ -32,6 +35,8 @@ class Pubs extends AbstractController
      */
     public function show(): Response
     {
+        $this->isLoggedIn();
+
         return $this->render('Admin/admin_pubs.html.twig', ['pubs' => $this->repository->getAll()]);
     }
 
@@ -40,6 +45,8 @@ class Pubs extends AbstractController
      */
     public function add(Request $request): Response
     {
+        $this->isLoggedIn();
+
         if ($request->get('name') && $request->get('town') && $request->get('postcode') && $request->get('description')) {
             $pub = [
                 'name' => $request->get('name'),
@@ -63,6 +70,8 @@ class Pubs extends AbstractController
      */
     public function edit(int $id): Response
     {
+        $this->isLoggedIn();
+
         $pub = $this->repository->getById($id);
 
         if ($pub) {
@@ -75,6 +84,8 @@ class Pubs extends AbstractController
      */
     public function update(Request $request): Response
     {
+        $this->isLoggedIn();
+
         $pub = $request->request->all();
 
         if ($pub) {
@@ -90,6 +101,8 @@ class Pubs extends AbstractController
      */
     public function delete(Request $request): Response
     {
+        $this->isLoggedIn();
+
         if ($request->get('id')) {
             $this->repository->delete((int) $request->get('id'));
 
@@ -99,5 +112,14 @@ class Pubs extends AbstractController
 
         $this->addFlash('error', 'Failed to delete pub');
         return $this->redirect('/dashboard/pubs');
+    }
+
+    private function isLoggedIn(): ?Response
+    {
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
+
+        return null;
     }
 }

@@ -9,15 +9,18 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class Jobs extends AbstractController
 {
     private Job $repository;
+    private SessionInterface $session;
 
-    public function __construct(Job $repository)
+    public function __construct(SessionInterface $session, Job $repository)
     {
         $this->repository = $repository;
+        $this->session = $session;
     }
 
     /**
@@ -69,6 +72,8 @@ class Jobs extends AbstractController
      */
     public function show(): Response
     {
+        $this->isLoggedIn();
+
         return $this->render('Admin/admin_jobs.html.twig', ['jobs' => $this->repository->getAll()]);
     }
 
@@ -77,6 +82,8 @@ class Jobs extends AbstractController
      */
     public function add(Request $request): Response
     {
+        $this->isLoggedIn();
+
         try {
             $job = $request->request->all();
             $jobId = $this->repository->add($job);
@@ -108,6 +115,8 @@ class Jobs extends AbstractController
      */
     public function edit(int $id): Response
     {
+        $this->isLoggedIn();
+
         $job = $this->formatChecked($this->repository->getById($id));
 
         if ($job) {
@@ -128,6 +137,8 @@ class Jobs extends AbstractController
      */
     public function updateJob(Request $request): Response
     {
+        $this->isLoggedIn();
+
         $job = $request->request->all();
 
         if ($job) {
@@ -146,6 +157,8 @@ class Jobs extends AbstractController
      */
     public function updateRequirements(Request $request): Response
     {
+        $this->isLoggedIn();
+
         $requirements = $request->get('requirements');
         $jobId = (int) $request->get('id');
 
@@ -171,6 +184,8 @@ class Jobs extends AbstractController
      */
     public function updateExpectations(Request $request): Response
     {
+        $this->isLoggedIn();
+
         $expectations = $request->get('expectations');
         $jobId = (int) $request->get('id');
 
@@ -196,6 +211,8 @@ class Jobs extends AbstractController
      */
     public function delete(Request $request): Response
     {
+        $this->isLoggedIn();
+
         $this->repository->delete((int) $request->get('id'));
 
         $this->addFlash('success', 'Successfully deleted job advert');
@@ -216,6 +233,14 @@ class Jobs extends AbstractController
         }
 
         return [];
+    }
 
+    private function isLoggedIn(): ?Response
+    {
+        if ($this->session->get('logged_in', false)) {
+            return $this->redirect('/admin');
+        }
+
+        return null;
     }
 }

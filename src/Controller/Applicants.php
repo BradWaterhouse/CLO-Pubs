@@ -8,15 +8,18 @@ use App\Repository\Applicants as ApplicantsRepository;
 use App\Repository\Job;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class Applicants extends AbstractController
 {
+    private SessionInterface $session;
     private ApplicantsRepository $applicants;
     private Job $jobs;
 
-    public function __construct(ApplicantsRepository $applicants, Job $jobs)
+    public function __construct(SessionInterface $session, ApplicantsRepository $applicants, Job $jobs)
     {
+        $this->session = $session;
         $this->applicants = $applicants;
         $this->jobs = $jobs;
     }
@@ -36,8 +39,18 @@ class Applicants extends AbstractController
      */
     public function applicants(int $id): Response
     {
+        $this->isLoggedIn();
         $applicants = $this->applicants->getApplicants($id);
 
         return $this->render('Admin/admin_applicants_view.html.twig', ['applicants' => $applicants, 'job' => $this->jobs->getById($id)]);
+    }
+
+    private function isLoggedIn(): ?Response
+    {
+        if (!$this->session->get('logged_in')) {
+            return $this->redirect('/admin');
+        }
+
+        return null;
     }
 }
