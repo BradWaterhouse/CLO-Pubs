@@ -56,7 +56,8 @@ class Pubs extends AbstractController
                 'name' => $request->get('name'),
                 'town' => $request->get('town'),
                 'postcode' => $request->get('postcode'),
-                'description' => $request->get('description')
+                'description' => $request->get('description'),
+                'image' => $request->get('image')
             ];
 
             $this->repository->add($pub);

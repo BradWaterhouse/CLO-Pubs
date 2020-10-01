@@ -67,12 +67,8 @@ class Admin extends AbstractController
 
         $user = $this->user->getUserByName($username);
 
-        if ($user) {
-            $hashedPassword = hash('sha256', $password . $_ENV['SALT']);
-
-            if ($hashedPassword === $user['password']) {
-                return $this->setLoggedIn($user);
-            }
+        if ($user && hash('sha256', $password . $_ENV['SALT']) === $user['password']) {
+            return $this->setLoggedIn($user);
         }
 
         return false;
@@ -80,9 +76,7 @@ class Admin extends AbstractController
 
     private function setLoggedIn(array $user): bool
     {
-        $userId = (int) $user['id'];
-
-        $this->session->set('userId', $userId);
+        $this->session->set('userId', (int) $user['id']);
         $this->session->set('username', $user['username']);
         $this->session->set('logged_in', true);
 

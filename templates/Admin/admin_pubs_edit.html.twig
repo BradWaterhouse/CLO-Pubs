@@ -37,6 +37,11 @@
                                             <input type="text" class="form-control" name="postcode" id="postcode" value="{{ pub.postcode }}" required placeholder="Postcode">
                                         </div>
                                         <div class="form-group">
+                                            <label for="formGroupExampleInput2">Image Link</label>
+                                            <input type="text" class="form-control" name="image" id="image" value="{{ pub.image }}" placeholder="Image Link">
+                                            <small class="form-text text-muted">Enter the link generated from <a href="http://imgur.com">imgur</a> here</small>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Description</label>
                                             <textarea class="form-control" id="description" name="description" rows="3" required placeholder="Description of pub">{{ pub.description }}</textarea>
                                         </div>

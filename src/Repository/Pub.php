@@ -60,13 +60,14 @@ class Pub
 
     public function add(array $pub): void
     {
-        $statement = $this->connection->prepare('INSERT INTO pub (name, town, postcode, description) VALUES (:name, :town, :postcode, :description)');
+        $statement = $this->connection->prepare('INSERT INTO pub (name, town, postcode, description, image) VALUES (:name, :town, :postcode, :description, :image)');
 
         $statement->execute([
             'name' => $pub['name'],
             'town' => $pub['town'],
             'postcode' => $pub['postcode'],
-            'description' => $pub['description']
+            'description' => $pub['description'],
+            'image' => $pub['image']
         ]);
     }
 
@@ -74,7 +75,7 @@ class Pub
     {
         $statement = $this->connection->prepare('
             UPDATE pub
-            SET name = :name, town = :town, postcode = :postcode, description = :description
+            SET name = :name, town = :town, postcode = :postcode, description = :description, image = :image
             WHERE id = :id
        ');
 
@@ -83,7 +84,8 @@ class Pub
             'town' => $pub['town'],
             'postcode' => $pub['postcode'],
             'description' => $pub['description'],
-            'id' => $pub['id']
+            'id' => $pub['id'],
+            'image' => $pub['image']
         ]);
     }
 

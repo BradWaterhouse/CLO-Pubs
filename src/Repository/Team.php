@@ -58,26 +58,28 @@ class Team
         return (int) $statement->fetch(FetchMode::COLUMN);
     }
 
-    public function add(string $name, string $role, string $bio): void
+    public function add(array $teamMember): void
     {
         $statement = $this->connection->prepare('INSERT INTO team (name, role, bio) VALUES (:name, :role, :bio)');
-
-        $statement->execute([
-            'name' => $name,
-            'role' => $role,
-            'bio' => $bio
-        ]);
-    }
-
-    public function update(array $teamMember): void
-    {
-        $statement = $this->connection->prepare('UPDATE team SET name = :name, role = :role, bio = :bio WHERE id = :id');
 
         $statement->execute([
             'name' => $teamMember['name'],
             'role' => $teamMember['role'],
             'bio' => $teamMember['bio'],
-            'id' => $teamMember['id']
+            'image' => $teamMember['image']
+        ]);
+    }
+
+    public function update(array $teamMember): void
+    {
+        $statement = $this->connection->prepare('UPDATE team SET name = :name, role = :role, bio = :bio, image = :image WHERE id = :id');
+
+        $statement->execute([
+            'name' => $teamMember['name'],
+            'role' => $teamMember['role'],
+            'bio' => $teamMember['bio'],
+            'id' => $teamMember['id'],
+            'image' => $teamMember['image']
         ]);
     }
 

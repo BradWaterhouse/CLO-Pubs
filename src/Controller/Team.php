@@ -52,8 +52,10 @@ class Team extends AbstractController
             return $this->redirect('/admin');
         }
 
-        if ($request->get('name') && $request->get('role') && $request->get('bio') ) {
-            $this->repository->add($request->get('name'), $request->get('role'), $request->get('bio'));
+        $teamMember = $request->request->all();
+
+        if ($teamMember) {
+            $this->repository->add($teamMember);
 
             $this->addFlash('success', 'Successfully added team member');
 

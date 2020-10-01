@@ -26,15 +26,20 @@
                                     <form action="/dashboard/pubs/add" method="post">
                                         <div class="form-group">
                                             <label for="formGroupExampleInput">Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                            <input type="text" class="form-control" id="name" name="name" required placeholder="Name">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Town</label>
-                                            <input type="text" class="form-control" id="town" name="town" placeholder="Town">
+                                            <input type="text" class="form-control" id="town" name="town" required placeholder="Town">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Postcode</label>
-                                            <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode">
+                                            <input type="text" class="form-control" id="postcode" name="postcode" required placeholder="Postcode">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Image Link</label>
+                                            <input type="text" class="form-control" id="image" name="image" placeholder="Image Link">
+                                            <small class="form-text text-muted">Enter the link generated from <a href="http://imgur.com">imgur</a> here</small>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Description</label>
