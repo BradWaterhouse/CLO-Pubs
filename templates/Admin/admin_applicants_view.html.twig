@@ -48,6 +48,13 @@
                                     <b>Would you be willing to relocate, if so what is your preferred area?</b>
                                     <p>{{ applicant.question_four }}</p>
                                 </div>
+                                <div class="pt-3">
+                                    <form action="/dashboard/applicant/delete" method="post">
+                                        <input type="text" id="id" name="id" hidden value="{{ applicant.id }}">
+                                        <input type="text" id="job_id" name="job_id" hidden value="{{ applicant.job_id }}">
+                                        <button type="submit" class="btn btn-danger">Delete Application</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}

@@ -16,10 +16,10 @@ class Applicants
         $this->connection = $connection;
     }
 
-    public function getApplicants(int $jobId): array
+    public function get(int $jobId): array
     {
         $statement = $this->connection->prepare('
-            SELECT email, name, question_one, question_two, question_three, question_four
+            SELECT id, job_id, email, name, question_one, question_two, question_three, question_four
             FROM job_applicants
             WHERE job_id = ?
         ');
@@ -37,5 +37,11 @@ class Applicants
         ');
 
         return (int) $statement->fetch(FetchMode::COLUMN);
+    }
+
+    public function delete(int $id): void
+    {
+        $statement = $this->connection->prepare('DELETE FROM job_applicants WHERE id = :id');
+        $statement->execute(['id' => $id]);
     }
 }
