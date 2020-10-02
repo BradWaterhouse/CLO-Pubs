@@ -154,3 +154,23 @@ section .section-title {
 .star-bg {
     color: #498fc4;
 }
+
+
+
+@media screen and (min-width: 0px) {
+    .pub-image {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 893px) {
+    .pub-image {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 892px) {
+    .pub-image {
+        width: 200px
+    }
+}
