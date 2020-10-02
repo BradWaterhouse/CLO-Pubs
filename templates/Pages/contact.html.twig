@@ -9,11 +9,24 @@
                 contact us directly. Our team will come back to you within
                 a matter of hours to help you.</p>
 
-            <div class="row">
+            {% for label, flashes in app.session.flashbag.all %}
+                {% for flash in flashes %}
+                    {% if ( label == 'success' ) %}
+                        <div class="alert alert-success alert-dismissible fade show">
+                            {{ flash }}
+                        </div>
+                    {% elseif ( label == 'error' ) %}
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            {{ flash }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
 
+            <div class="row">
                 <!--Grid column-->
                 <div class="col-md-9 mb-md-0 mb-5">
-                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+                    <form action="/contact-us" method="post">
 
                         <!--Grid row-->
                         <div class="row">
@@ -30,7 +43,7 @@
                             <!--Grid column-->
                             <div class="col-md-6">
                                 <div class="md-form mb-2">
-                                    <input type="text" id="email" name="email" placeholder="Email Address"
+                                    <input type="email" id="email" name="email" placeholder="Email Address"
                                            class="form-control">
                                     <small class="form-text text-muted">We'll never share your email with anyone
                                         else.</small>
@@ -67,12 +80,12 @@
                             </div>
                         </div>
                         <!--Grid row-->
+                        <div class="text-center text-md-left pb-4">
+                            <input type="hidden" name="token" id="token" value="{{ csrf_token('contact-form') }}"/>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
 
                     </form>
-
-                    <div class="text-center text-md-left pb-4">
-                        <button class="btn btn-primary">Send</button>
-                    </div>
                     <div class="status"></div>
                     <div class="google-maps pt-2">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d521.162915616868!2d-1.2461701024549878!3d53.13191019379084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd0cd2dfbb2d8672b!2sCommunity%20Pubs%20Ltd!5e0!3m2!1sen!2suk!4v1596193492523!5m2!1sen!2suk&z=2"
