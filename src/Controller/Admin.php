@@ -37,8 +37,11 @@ class Admin extends AbstractController
     {
         $username = $request->get('username');
         $password = $request->get('password');
+        $token = $request->get('token') ?? '';
 
-        if ($username && $password) {
+
+
+        if ($username && $password && $this->isCsrfTokenValid('login-form', $token)) {
             $loggedIn = $this->loginByUsername($username, $password);
 
             if ($loggedIn) {

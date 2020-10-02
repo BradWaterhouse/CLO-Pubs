@@ -24,23 +24,15 @@
             {% endfor %}
 
             <div class="row">
-                <!--Grid column-->
                 <div class="col-md-9 mb-md-0 mb-5">
                     <form action="/contact-us" method="post">
-
-                        <!--Grid row-->
                         <div class="row">
-
-                            <!--Grid column-->
                             <div class="col-md-6">
                                 <div class="md-form mb-2">
                                     <input type="text" id="name" name="name" placeholder="Name" class="form-control">
                                     <small class="form-text text-muted">Your name</small>
                                 </div>
                             </div>
-                            <!--Grid column-->
-
-                            <!--Grid column-->
                             <div class="col-md-6">
                                 <div class="md-form mb-2">
                                     <input type="email" id="email" name="email" placeholder="Email Address"
@@ -49,12 +41,7 @@
                                         else.</small>
                                 </div>
                             </div>
-                            <!--Grid column-->
-
                         </div>
-                        <!--Grid row-->
-
-                        <!--Grid row-->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="md-form mb-2">
@@ -64,14 +51,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Grid row-->
-
-                        <!--Grid row-->
                         <div class="row">
-
-                            <!--Grid column-->
                             <div class="col-md-12">
-
                                 <div class="md-form pb-2">
                                     <textarea type="text" id="message" name="message" placeholder="Message" rows="5"
                                               class="form-control md-textarea"></textarea>
@@ -79,12 +60,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Grid row-->
                         <div class="text-center text-md-left pb-4">
                             <input type="hidden" name="token" id="token" value="{{ csrf_token('contact-form') }}"/>
                             <button type="submit" class="btn btn-primary">Send</button>
                         </div>
-
                     </form>
                     <div class="status"></div>
                     <div class="google-maps pt-2">
@@ -93,9 +72,6 @@
                                 aria-hidden="false" tabindex="0"></iframe>
                     </div>
                 </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
                 <div class="col-md-3">
                     <ul class="list-unstyled mb-0">
                         <li>
@@ -159,7 +135,6 @@
                         </li>
                     </ul>
                 </div>
-                <!--Grid column-->
 
             </div>
         </section>
