@@ -28,6 +28,9 @@
             <div class="form-group">
                 <input type="hidden" name="token" id="token" value="{{ csrf_token('login-form') }}"/>
                 <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                <div class="pt-3">
+                    <a href="/"><button type="button" class="btn btn-primary btn-block">Return to homepage</button></a>
+                </div>
             </div>
         </form>
     </div>
