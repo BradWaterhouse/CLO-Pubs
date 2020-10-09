@@ -15,49 +15,59 @@
                         </div>
                     {% endfor %}
 
-                    {% for applicant in applicants %}
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-bar mr-1"></i>
-                                <b>Brad Waterhouse</b>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-row col-12 mb-4">
-                                    <div class="col-md-4">
-                                        <b>Name</b>
-                                        <p>{{ applicant.name }}</p>
+                    {% if applicants|length > 0 %}
+                        {% for applicant in applicants %}
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar mr-1"></i>
+                                    <b>Brad Waterhouse</b>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row col-12 mb-4">
+                                        <div class="col-md-4">
+                                            <b>Name</b>
+                                            <p>{{ applicant.name }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Contact Number</b>
+                                            <p>{{ applicant.contact_number }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>Email</b>
+                                            <p>{{ applicant.email }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <b>Email</b>
-                                        <p>{{ applicant.email }}</p>
+                                    <div class="col-12">
+                                        <b>Do you have a personal licence, if so how long have you held it for?</b>
+                                        <p>{{ applicant.question_one }}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <b>How is your cellar knowledge?</b>
+                                        <p>{{ applicant.question_two }}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <b>How many years experience do you have in a pub management role?</b>
+                                        <p>{{ applicant.question_three }}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <b>Would you be willing to relocate, if so what is your preferred area?</b>
+                                        <p>{{ applicant.question_four }}</p>
+                                    </div>
+                                    <div class="pt-3">
+                                        <form action="/dashboard/applicant/delete" method="post">
+                                            <input type="text" id="id" name="id" hidden value="{{ applicant.id }}">
+                                            <input type="text" id="job_id" name="job_id" hidden value="{{ applicant.job_id }}">
+                                            <button type="submit" class="btn btn-danger">Delete Application</button>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <b>Do you have a personal licence, if so how long have you held it for?</b>
-                                    <p>{{ applicant.question_one }}</p>
-                                </div>
-                                <div class="col-12">
-                                    <b>How is your cellar knowledge?</b>
-                                    <p>{{ applicant.question_two }}</p>
-                                </div>
-                                <div class="col-12">
-                                    <b>How many years experience do you have in a pub management role?</b>
-                                    <p>{{ applicant.question_three }}</p>
-                                </div>
-                                <div class="col-12">
-                                    <b>Would you be willing to relocate, if so what is your preferred area?</b>
-                                    <p>{{ applicant.question_four }}</p>
-                                </div>
-                                <div class="pt-3">
-                                    <form action="/dashboard/applicant/delete" method="post">
-                                        <input type="text" id="id" name="id" hidden value="{{ applicant.id }}">
-                                        <input type="text" id="job_id" name="job_id" hidden value="{{ applicant.job_id }}">
-                                        <button type="submit" class="btn btn-danger">Delete Application</button>
-                                    </form>
-                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                      {% else %}
+                          <div class="pb-4 pt-4">
+                              <h4 class="text-center">No applicants for this job.</h4>
+                          </div>
+                    {% endif %}
 
 
 

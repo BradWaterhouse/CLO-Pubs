@@ -64,6 +64,14 @@ class Jobs extends AbstractController
 
         $this->repository->apply($application);
 
+        return $this->redirect('/job/applied');
+    }
+
+    /**
+     * @Route("/job/applied", name="applied", methods={"GET"})
+     */
+    public function applied(): Response
+    {
         return $this->render('Pages/applied.html.twig');
     }
 

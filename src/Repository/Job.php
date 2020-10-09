@@ -100,8 +100,8 @@ class Job
     public function apply(array $application): void
     {
         $statement = $this->connection->prepare('
-            INSERT INTO job_applicants (job_id, name, email, question_one, question_two, question_three, question_four)
-            VALUES (:job_id, :name, :email, :question_one, :question_two, :question_three, :question_four)
+            INSERT INTO job_applicants (job_id, name, email, question_one, question_two, question_three, question_four, contact_number)
+            VALUES (:job_id, :name, :email, :question_one, :question_two, :question_three, :question_four, :contact_number)
        ');
 
         $statement->execute([
@@ -111,7 +111,8 @@ class Job
             'question_one' => $application['personal_licence'],
             'question_two' => $application['cellar_knowledge'],
             'question_three' => $application['experience'],
-            'question_four' => $application['relocate']
+            'question_four' => $application['relocate'],
+            'contact_number' => $application['number']
         ]);
     }
 

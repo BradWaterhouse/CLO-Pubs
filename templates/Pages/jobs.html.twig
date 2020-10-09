@@ -4,37 +4,45 @@
     <div class="container py-4">
         <div class="team-header text-center">
             <h2 class="h1-responsive font-weight-bold text-center my-3">Jobs</h2>
-            <p class="mb-5">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+            <p class="mb-2">Here at CLO Pubs we off a wide range of opportunities,
+                here is a list of our current vacancies. Please click apply now and fill out the application form if you are interested in a specific role.
+            </p>
+            <p class="mb-4">If you have any questions please do not hesitate to contact us.</p>
         </div>
         <div class="col-lg-10 mx-auto">
             <ul class="list-group">
-                {% for job in jobs %}
-                <li class="list-group-item mb-5 shadow">
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h4 class="mt-0 font-weight-bold mb-2 pt-3">{{ job.job.role }}</h4>
-                            <h5 class="mt-0 font-weight-bold mb-2 pt-3">{{ job.job.title }} - {{ job.job.town }}</h5>
-                            <p class="font-italic text-muted mb-0 small">{{ job.job.description }}</p>
-                            <h6 class="mt-0 font-weight-bold pt-3">{{ job.job.salary }}</h6>
-                            <h5 class="pt-3">Expectations</h5>
-                            <ul>
-                                {%  for expectation in job.expectations %}
-                                 <li>{{ expectation }}</li>
-                                {% endfor %}
-                            </ul>
-                            <h5 class="pt-3">Experience</h5>
-                            <ul>
-                                {%  for requirement in job.requirements %}
-                                    <li>{{ requirement }}</li>
-                                {% endfor %}
-                            </ul>
-                            <a href="/job/{{ job.job.id }}/apply" class="btn btn-primary mt-4">Apply now</a>
+                {% if jobs|length > 0 %}
+                    {% for job in jobs %}
+                    <li class="list-group-item mb-5 shadow">
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h4 class="mt-0 font-weight-bold mb-2 pt-3">{{ job.job.role }}</h4>
+                                <h5 class="mt-0 font-weight-bold mb-2 pt-3">{{ job.job.title }} - {{ job.job.town }}</h5>
+                                <p class="mb-0 small">{{ job.job.description }}</p>
+                                <h6 class="mt-0 font-weight-bold pt-3">{{ job.job.salary }}</h6>
+                                <h5 class="pt-3">Expectations</h5>
+                                <ul>
+                                    {%  for expectation in job.expectations %}
+                                     <li>{{ expectation }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <h5 class="pt-3">Experience</h5>
+                                <ul>
+                                    {%  for requirement in job.requirements %}
+                                        <li>{{ requirement }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <a href="/job/{{ job.job.id }}/apply" class="btn btn-primary mt-4">Apply now</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                {% endfor %}
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                        <div>
+                            <h2 class="text-center pb-2">Sorry, we don't have any vacancies at the moment.</h2>
+                            <h5 class="text-center mb-5">please check back later and keep an eye on our <a href="https://www.facebook.com/localcommunitypubs/">Facebook page<a> for updates</h5>
+                        </div>
+                    {% endif %}
             </ul>
         </div>
     </div>

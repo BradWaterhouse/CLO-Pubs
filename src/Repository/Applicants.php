@@ -19,7 +19,7 @@ class Applicants
     public function get(int $jobId): array
     {
         $statement = $this->connection->prepare('
-            SELECT id, job_id, email, name, question_one, question_two, question_three, question_four
+            SELECT id, job_id, email, name, question_one, question_two, question_three, question_four, contact_number
             FROM job_applicants
             WHERE job_id = ?
         ');
