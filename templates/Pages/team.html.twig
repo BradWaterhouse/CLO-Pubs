@@ -5,42 +5,37 @@
     <section id="team" class="pb-5">
         <div class="container text-center">
             <div class="team-header">
-                <h2 class="h1-responsive font-weight-bold text-center my-4">Meet Our Team</h2>
-                <p class="mb-5">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+                <h2 class="h1-responsive font-weight-bold text-center my-3">Meet Our Team</h2>
+                <p class="mb-5">Meet our fantastic team that work tirelessly behind the scenes to provide excellent support and guidance to all of our pubs.</p>
             </div>
             <div class="team col-lg-10 mx-auto">
                 <div class="row">
                     {% for teamMember in team %}
                     <!-- Team member -->
                     <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="image-flip">
-                            <div class="mainflip flip-0">
+                        <div class="">
+                            <div class="">
                                 <div class="frontside">
                                     <div class="card">
                                         <div class="card-body text-center">
                                             <p><img class=" img-fluid"
                                                     src="{{ teamMember.image }}"
                                                     alt="card image"></p>
-                                            <h4 class="card-title">{{ teamMember.name }}</h4>
+                                            <h4 class="card-title pb-3 pt-3">{{ teamMember.name }}</h4>
                                             <p class="card-text">{{ teamMember.role }}</p>
-                                            <a href="https://www.fiverr.com/share/qb8D02"
-                                               class="btn btn-primary btn-sm"><i
-                                                        class="fa fa-plus"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="backside">
-                                    <div class="card">
-                                        <div class="card-body text-center mt-4">
-                                            <h4 class="card-title">{{ teamMember.name }}</h4>
-                                            <p class="card-text">
-                                                {{ teamMember.bio }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+{#                                <div class="backside">#}
+{#                                    <div class="card">#}
+{#                                        <div class="card-body text-center mt-4">#}
+{#                                            <h4 class="card-title">{{ teamMember.name }}</h4>#}
+{#                                            <p class="card-text">#}
+{#                                                {{ teamMember.bio }}#}
+{#                                            </p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
                             </div>
                         </div>
                     </div>
