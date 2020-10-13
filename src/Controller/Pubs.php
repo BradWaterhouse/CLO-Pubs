@@ -27,7 +27,7 @@ class Pubs extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('Pages/pubs.html.twig', ['pubs' => $this->repository->getAll()]);
+        return $this->render('Pages/pubs.html.twig', ['pubs' => $this->repository->getAll(), 'pageTitle' => 'CLO Pubs | Our Pubs']);
     }
 
     /**

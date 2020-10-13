@@ -19,7 +19,7 @@ class Contact extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('Pages/contact.html.twig');
+        return $this->render('Pages/contact.html.twig', ['pageTitle' => 'CLO Pubs | Contact']);
     }
 
     /**

@@ -38,7 +38,7 @@ class Jobs extends AbstractController
             ];
         }
 
-       return $this->render('Pages/jobs.html.twig', ['jobs' => $formatted]);
+       return $this->render('Pages/jobs.html.twig', ['jobs' => $formatted, 'pageTitle' => 'CLO Pubs | Jobs']);
     }
 
     /**
@@ -49,10 +49,10 @@ class Jobs extends AbstractController
         $job = $this->repository->getById($id);
 
         if ($job) {
-            return $this->render('Pages/apply.html.twig', ['job' => $job]);
+            return $this->render('Pages/apply.html.twig', ['job' => $job, 'pageTitle' => 'CLO Pubs | Apply']);
         }
 
-        return $this->render('Pages/home.html.twig');
+        return $this->render('Pages/home.html.twig', ['pageTitle' => 'CLO Pubs | Home']);
     }
 
     /**
@@ -72,7 +72,7 @@ class Jobs extends AbstractController
      */
     public function applied(): Response
     {
-        return $this->render('Pages/applied.html.twig');
+        return $this->render('Pages/applied.html.twig', ['pageTitle' => 'CLO Pubs | Applied']);
     }
 
     /**

@@ -15,6 +15,6 @@ final class Home extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('Pages/home.html.twig');
+        return $this->render('Pages/home.html.twig', ['pageTitle' => 'CLO Pubs | Home']);
     }
 }

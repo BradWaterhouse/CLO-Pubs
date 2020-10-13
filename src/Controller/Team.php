@@ -28,7 +28,7 @@ class Team extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('Pages/team.html.twig', ['team' => $this->repository->getAll()]);
+        return $this->render('Pages/team.html.twig', ['team' => $this->repository->getAll(), 'pageTitle' => 'CLO Pubs | Our Team']);
     }
 
     /**
