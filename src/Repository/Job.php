@@ -19,8 +19,9 @@ class Job
     public function getAll(): array
     {
         $statement = $this->connection->query('
-            SELECT id, title, role, town, postcode, active, description, salary
+            SELECT job.id, title, role, town, postcode, active, description, salary, (SELECT COUNT(*) FROM job_applicants WHERE job_id = job.id) AS applicants
             FROM job
+            LEFT JOIN job_applicants ON job_applicants.job_id = job.id
             WHERE active = 1
         ');
 

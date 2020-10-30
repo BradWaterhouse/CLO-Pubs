@@ -23,6 +23,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Town</th>
+                                        <th>Number of Applicants</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -31,6 +32,7 @@
                                         <tr>
                                             <td><a href="/dashboard/applicants/{{ job.id }}">{{ job.title }}</a></td>
                                             <td>{{ job.role }}</td>
+                                            <td>{{ job.applicants }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
