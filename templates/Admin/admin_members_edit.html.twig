@@ -36,10 +36,6 @@
                                             <label for="formGroupExampleInput2">Image</label>
                                             <input type="text" class="form-control" name="image" id="image" value="{{ teamMember.image }}" required placeholder="Image Link">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Bio</label>
-                                            <textarea class="form-control" id="bio" name="bio" rows="3" required placeholder="Description of person">{{ teamMember.bio }}</textarea>
-                                        </div>
                                         <input hidden type="text" value="{{ teamMember.id }}" name="id" id="id">
                                         <button type="submit" class="btn blue-background text-white mb-2">Update</button>
                                     </form>

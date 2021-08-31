@@ -9,6 +9,7 @@ use Doctrine\DBAL\FetchMode;
 
 class Team
 {
+    CONST DEFAULT_IMAGE = 'https://st4.depositphotos.com/1156795/20814/v/450/depositphotos_208142514-stock-illustration-profile-placeholder-image-gray-silhouette.jpg';
     private Connection $connection;
 
     public function __construct(Connection $connection)
@@ -19,7 +20,7 @@ class Team
     public function getAll(): array
     {
         $statement = $this->connection->query('
-            SELECT id, name, role, bio, image
+            SELECT id, name, role, image
             FROM team
         ');
 
@@ -35,7 +36,7 @@ class Team
     public function getById(int $id): array
     {
         $statement = $this->connection->prepare('
-            SELECT id, name, role, bio, image
+            SELECT id, name, role, image
             FROM team
             WHERE id = ?
         ');
@@ -60,24 +61,22 @@ class Team
 
     public function add(array $teamMember): void
     {
-        $statement = $this->connection->prepare('INSERT INTO team (name, role, bio) VALUES (:name, :role, :bio)');
+        $statement = $this->connection->prepare('INSERT INTO team (name, role, image) VALUES (:name, :role, :image)');
 
         $statement->execute([
             'name' => $teamMember['name'],
             'role' => $teamMember['role'],
-            'bio' => $teamMember['bio'],
-            'image' => $teamMember['image']
+            'image' => (!empty($teamMember['image']) ? $teamMember['image'] : self::DEFAULT_IMAGE)
         ]);
     }
 
     public function update(array $teamMember): void
     {
-        $statement = $this->connection->prepare('UPDATE team SET name = :name, role = :role, bio = :bio, image = :image WHERE id = :id');
+        $statement = $this->connection->prepare('UPDATE team SET name = :name, role = :role, image = :image WHERE id = :id');
 
         $statement->execute([
             'name' => $teamMember['name'],
             'role' => $teamMember['role'],
-            'bio' => $teamMember['bio'],
             'id' => $teamMember['id'],
             'image' => $teamMember['image']
         ]);
